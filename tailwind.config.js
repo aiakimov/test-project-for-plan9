@@ -7,10 +7,21 @@ module.exports = {
   ],
   content: [],
   theme: {
+    colors: {
+      'text': {
+          light: '#0d9488',
+          default: '#0f766e',
+          dark: '#134e4a',
+      },
+      'bg': {
+        light: '#f0fdfa',
+        dark: '#ccfbf1',
+      },
+      },
     extend: {
       fontFamily: {
         'sans': 'Montserrat, sans-serif',
-      }
+      },
     },
   },
   plugins: [],
