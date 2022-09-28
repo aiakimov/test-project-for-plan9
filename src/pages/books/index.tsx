@@ -6,37 +6,56 @@ import { Books } from "../../interfaces";
 import { getFromLocalStorage } from "../../utilities/localStorage";
 
 const Book = () => {
-	const getBooks = async (next: string) => {
-		const responce = await (await axios.get(next)).data;
-		setBooks(responce.results);
-		setNextPage(responce.next);
-	};
 	const [books, setBooks] = useState<Books[]>([]);
 	const [viewedBooks, setViewedBooks] = useState<string[]>([]);
 	const [nextPage, setNextPage] = useState<string>(
-		"https://gutendex.com/books?page=20"
+		"https://gutendex.com/books?page=1"
 	);
+	const [request, setRequest] = useState<boolean>(false);
+
+	const scrollHandler = () => {
+		if (
+			document.documentElement.scrollHeight -
+				(document.documentElement.scrollTop + window.innerHeight) <
+			100
+		) {
+			setRequest(true);
+		}
+	};
 
 	useEffect(() => {
-		getBooks(nextPage);
+		axios.get(nextPage).then((responce) => {
+			setBooks(responce.data.results);
+			setNextPage(responce.data.next);
+		});
 	}, []);
+
+	useEffect(() => {
+		document.addEventListener("scroll", scrollHandler);
+		return function () {
+			document.removeEventListener("scroll", scrollHandler);
+		};
+	}, []);
+
+	useEffect(() => {
+		if (request) {
+			axios
+				.get(nextPage)
+				.then((responce) => {
+					setBooks([...books, ...responce.data.results]);
+					setNextPage(responce.data.next);
+				})
+				.finally(() => {
+					setRequest(false);
+				});
+		}
+	}, [request]);
 
 	useEffect(() => {
 		const viewedBooks = getFromLocalStorage();
 		viewedBooks && setViewedBooks(viewedBooks);
 		console.log(viewedBooks);
 	}, []);
-
-	// useEffect(() => {
-	// 	document.body.addEventListener("scroll", () => {
-	// 		console.log(globalThis.scrollY);
-	// 		const height = document.body.scrollHeight;
-
-	// 		if (globalThis.scrollY * 2 == height) {
-	// 			console.log("ok");
-	// 		}
-	// 	});
-	// }, []);
 
 	return (
 		<>
@@ -66,7 +85,7 @@ const Book = () => {
 												  "..."
 												: item.title}
 										</h3>
-										<div className="text-right flex flex-col gap-2 justify-end">
+										<div className="text-right flex flex-col gap-2 justify-end underline underline-offset-8 decoration-bg-dark">
 											{item.authors.map((item, index) => {
 												return (
 													<p
@@ -79,7 +98,7 @@ const Book = () => {
 										</div>
 										<img
 											className="overflow-hidden max-w-[50%] absolute left-[10%] bottom-[110px] max-h-[200px]
-										opacity-100 shadow-md rounded z-[-1]"
+										opacity-100 shadow-xl rounded z-[-1] border-2 border-bg-light "
 											src={item.formats["image/jpeg"]}
 											alt="book-image"
 										/>
