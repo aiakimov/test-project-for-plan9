@@ -17,6 +17,7 @@ export interface Books {
 	media_type: string;
 	formats: {
 		"image/jpeg": string
+		
 	};
 	download_count: number;
 };
@@ -27,3 +28,17 @@ export interface Pages {
 	previous: string;
 	results: Books[];
 };
+
+export interface Filters {
+	EN: boolean;
+	FR: boolean;
+	FI: boolean;
+}
+
+export interface PropsForm {
+	filters: Filters;
+	searchValue: string
+	setFilters: (values: Filters) => void;
+	setSearchValue: (searchValue: string) => void;
+	setStartSearch: (value: boolean) => void;
+}

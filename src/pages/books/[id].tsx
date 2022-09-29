@@ -21,14 +21,14 @@ const Book = () => {
 	}, []);
 
 	return (
-		<Layout>
-			<div className=" flex flex-col items-center gap-7 text-center">
+		<Layout title="BOOK">
+			<div className=" flex flex-col items-center gap-7 text-center mt-[15%]">
 				<h1 className="text-4xl text-text-dark font-bold py-5">
 					{book.length ? book[0].title : ""}
 				</h1>
 				<img
 					className="overflow-hidden max-w-[20%] mb-5
-							opacity-100 shadow-2xl rounded z-[-1]
+							opacity-100 shadow-2xl rounded 
 							border border-bg-dark"
 					src={book.length ? book[0].formats["image/jpeg"] : ""}
 					alt="book-image"

@@ -17,7 +17,7 @@ module.exports = {
         light: '#f0fdfa',
         dark: '#ccfbf1',
       },
-      },
+    },
     extend: {
       fontFamily: {
         'sans': 'Montserrat, sans-serif',
