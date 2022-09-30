@@ -4,7 +4,10 @@ import { useEffect, useState } from "react";
 import Forms from "../../components/Forms";
 import Layout from "../../components/Layout";
 import { Books, Filters } from "../../interfaces";
-import { getCardFromLocalStorage, setToLocalStorage } from "../../utilities/localStorage";
+import {
+	getCardFromLocalStorage,
+	setToLocalStorage,
+} from "../../utilities/localStorage";
 
 const Book = () => {
 	const [books, setBooks] = useState<Books[]>([]);
@@ -23,10 +26,12 @@ const Book = () => {
 	const [startSearch, setStartSearch] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-	const version = process.env.NEXT_PUBLIC_VALUE;
-	if (version) {
-		setToLocalStorage("VERSION", version);
-	}
+	useEffect(() => {
+		const version = process.env.NEXT_PUBLIC_VALUE;
+		if (version) {
+			setToLocalStorage("VERSION", version);
+		}
+	}, []);
 
 	const scrollHandler = () => {
 		if (
@@ -37,12 +42,6 @@ const Book = () => {
 			setRequest(true);
 		}
 	};
-		useEffect(() => {
-			const version = process.env.NEXT_PUBLIC_VALUE;
-			if (version) {
-				setToLocalStorage("VERSION", version);
-			}
-		});
 
 	useEffect(() => {
 		const localStorageArr = getCardFromLocalStorage();

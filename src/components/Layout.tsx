@@ -20,12 +20,12 @@ const Layaut = ({ children, title = "TEST PROJECT FOR PLAN9" }: Props) => {
 			<header className="sticky inset-0">
 				<nav className="flex flex-wrap bg-bg-light gap-10 justify-center py-5 z-50 opacity-100">
 					<Link href="/">
-						<a className="text-text-default hover:text-text-dark text-2xl hover:transition-all z-[999]">
+						<a className="text-text-default hover:text-text-dark text-2xl hover:transition-all z-[999] tracking-widest">
 							Home
 						</a>
 					</Link>
 					<Link href="/books">
-						<a className="text-text-default hover:text-text-dark text-2xl hover:transition-all z-[999]">
+						<a className="text-text-default hover:text-text-dark text-2xl hover:transition-all z-[999] tracking-widest">
 							Books
 						</a>
 					</Link>

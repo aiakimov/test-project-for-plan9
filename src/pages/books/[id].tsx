@@ -23,12 +23,13 @@ const Book = () => {
 	useEffect(() => {
 		setCardToLocalStorage(id);
 	}, []);
+	
 	useEffect(() => {
 		const version = process.env.NEXT_PUBLIC_VALUE;
 		if (version) {
 			setToLocalStorage("VERSION", version);
 		}
-	});
+	},[]);
 
 	return (
 		<Layout title="BOOK">
