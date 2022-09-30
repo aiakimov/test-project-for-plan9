@@ -87,7 +87,7 @@ const Book = () => {
 						className="px-[20px] py-[10px] border border-text-dark font-bold rounded
 					cursor-pointer delay-50 hover:shadow-xl hover:bg-text-light hover:text-bg-light
 					hover:shadow-bg-light hover:border-2 hover:border-text-light active:border-bg-light hover:transition-all bg-bg-dark shadow-bg-light shadow-xl">
-						To List
+						Back To List
 					</p>
 				</Link>
 			</div>
