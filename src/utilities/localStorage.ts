@@ -1,8 +1,8 @@
 
 const KEY = "viewedCards";
 
-export const setToLocalStorage=(id: string)=> {
-    const oldArr = getFromLocalStorage()
+export const setCardToLocalStorage=(id: string)=> {
+    const oldArr = getCardFromLocalStorage()
     if (oldArr) {
         if ((oldArr.find((item)=>{return item == id }))) {
             return
@@ -18,7 +18,14 @@ export const setToLocalStorage=(id: string)=> {
     localStorage.setItem(KEY, jsonArr);
 }
 
-export const getFromLocalStorage = ():string[]|undefined => {
+export const setToLocalStorage = (key: string, value: string) => {
+    if(key&&value){
+    localStorage.setItem(key, value);
+	}
+}
+
+
+export const getCardFromLocalStorage = ():string[]|undefined => {
     const arr = localStorage.getItem(KEY);
     if (arr) {
         return JSON.parse(arr);

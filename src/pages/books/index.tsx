@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Forms from "../../components/Forms";
 import Layout from "../../components/Layout";
 import { Books, Filters } from "../../interfaces";
-import { getFromLocalStorage } from "../../utilities/localStorage";
+import { getCardFromLocalStorage, setToLocalStorage } from "../../utilities/localStorage";
 
 const Book = () => {
 	const [books, setBooks] = useState<Books[]>([]);
@@ -21,6 +21,12 @@ const Book = () => {
 		"https://gutendex.com/books?"
 	);
 	const [startSearch, setStartSearch] = useState<boolean>(false);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+
+	const version = process.env.NEXT_PUBLIC_VALUE;
+	if (version) {
+		setToLocalStorage("VERSION", version);
+	}
 
 	const scrollHandler = () => {
 		if (
@@ -31,9 +37,15 @@ const Book = () => {
 			setRequest(true);
 		}
 	};
+		useEffect(() => {
+			const version = process.env.NEXT_PUBLIC_VALUE;
+			if (version) {
+				setToLocalStorage("VERSION", version);
+			}
+		});
 
 	useEffect(() => {
-		const localStorageArr = getFromLocalStorage();
+		const localStorageArr = getCardFromLocalStorage();
 		if (localStorageArr) {
 			setViewedBooks(localStorageArr);
 		}
@@ -43,7 +55,9 @@ const Book = () => {
 		axios.get(filterReq).then((responce) => {
 			setBooks(responce.data.results);
 			setNextPage(responce.data.next);
+			setIsLoading(true);
 		});
+		return setIsLoading(false);
 	}, []);
 
 	useEffect(() => {
@@ -109,14 +123,11 @@ const Book = () => {
 	}, [request]);
 
 	useEffect(() => {
-		const viewedBooks = getFromLocalStorage();
+		const viewedBooks = getCardFromLocalStorage();
 		viewedBooks && setViewedBooks(viewedBooks);
 	}, []);
 
-	useEffect(() => {
-		console.log(filterReq);
-	}, [filterReq]);
-
+	console.log(process.env.NEXT_PUBLIC_VALUE);
 	return (
 		<>
 			<Layout title="BOOKS">
@@ -128,7 +139,7 @@ const Book = () => {
 					setStartSearch={setStartSearch}
 				/>
 				<ul className="flex flex-wrap gap-20 justify-center mt-[50px]">
-					{books.length ? (
+					{books.length && isLoading ? (
 						""
 					) : (
 						<div className="flex flex-col items-center gap-[50px]">
@@ -142,7 +153,7 @@ const Book = () => {
 								className="px-[20px] py-[10px] border border-text-dark font-bold rounded
 					cursor-pointer delay-50 hover:shadow-xl hover:bg-text-light hover:text-bg-light
 					hover:shadow-bg-light hover:border-2 hover:border-text-light active:border-bg-light hover:transition-all bg-bg-dark shadow-bg-light shadow-xl">
-								Go Back
+								Back
 							</button>
 						</div>
 					)}

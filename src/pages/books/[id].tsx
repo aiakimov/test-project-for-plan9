@@ -3,7 +3,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Books } from "../../interfaces";
 import Layout from "../../components/Layout";
-import { setToLocalStorage } from "../../utilities/localStorage";
+import {
+	setCardToLocalStorage,
+	setToLocalStorage,
+} from "../../utilities/localStorage";
 import Link from "next/link";
 
 const Book = () => {
@@ -18,8 +21,14 @@ const Book = () => {
 	}, []);
 
 	useEffect(() => {
-		setToLocalStorage(id);
+		setCardToLocalStorage(id);
 	}, []);
+	useEffect(() => {
+		const version = process.env.NEXT_PUBLIC_VALUE;
+		if (version) {
+			setToLocalStorage("VERSION", version);
+		}
+	});
 
 	return (
 		<Layout title="BOOK">
@@ -74,7 +83,7 @@ const Book = () => {
 						className="px-[20px] py-[10px] border border-text-dark font-bold rounded
 					cursor-pointer delay-50 hover:shadow-xl hover:bg-text-light hover:text-bg-light
 					hover:shadow-bg-light hover:border-2 hover:border-text-light active:border-bg-light hover:transition-all bg-bg-dark shadow-bg-light shadow-xl">
-						Go Back
+						To List
 					</p>
 				</Link>
 			</div>
