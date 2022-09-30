@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Head from "next/head";
-import Container from "next";
 import React, { ReactNode } from "react";
 
 type Props = {
@@ -31,7 +30,7 @@ const Layaut = ({ children, title = "TEST PROJECT FOR PLAN9" }: Props) => {
 				/>
 			</Head>
 			<header className="sticky inset-0">
-				<nav className="flex flex-wrap bg-bg-light gap-10 justify-center py-5 z-[9999]">
+				<nav className="flex flex-wrap bg-bg-light gap-10 justify-center py-5 z-50 opacity-100">
 					<Link href="/">
 						<a className="text-text-default hover:text-text-dark text-2xl hover:transition-all z-[999]">
 							Home
@@ -45,7 +44,7 @@ const Layaut = ({ children, title = "TEST PROJECT FOR PLAN9" }: Props) => {
 				</nav>
 			</header>
 			<main className="">
-				<div className="container mx-auto z-[1] pb-[50px] bg-emerald-50">
+				<div className="container mx-auto pb-[50px] bg-emerald-50">
 					{children}
 				</div>
 			</main>

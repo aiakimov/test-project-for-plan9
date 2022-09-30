@@ -25,8 +25,8 @@ const Forms: FC<PropsForm> = ({
 	}, [innerSearchValue]);
 
 	return (
-		<div className="flex justify-between static h-[70px] w-full py-[10px] ">
-			<div className="flex justify-center gap-3 w-[40%] items-center">
+		<div className="flex justify-between static lg:h-[70px] w-full py-[10px] lg:flex-row md:flex-row mt-[20px] flex-col items-center gap-5 ">
+			<div className="flex justify-center gap-3 lg:w-[40%] w-[90%] items-center ">
 				<input
 					name="EN"
 					type="checkbox"
@@ -70,11 +70,11 @@ const Forms: FC<PropsForm> = ({
 					FI
 				</label>
 			</div>
-			<div className=" flex justify-center gap-5 w-[40%]">
+			<div className=" flex justify-center gap-5 lg:w-[40%] w-[100%] ">
 				<input
 					type="text"
 					placeholder="Search the book"
-					className=" text-text-dark w-[50%] h-[50px] border border-text-dark  text-right p-[15px] bold
+					className=" text-text-dark w-[50%] h-[50px] border border-text-dark  text-right p-[15px] bold text-sm
 						cursor-text delay-50 hover:shadow-xl hover:transition-all rounded shadow-bg-light shadow-xl"
 					value={searchValue}
 					onChange={(e) => {

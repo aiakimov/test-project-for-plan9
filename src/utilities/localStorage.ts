@@ -4,7 +4,7 @@ const KEY = "viewedCards";
 export const setToLocalStorage=(id: string)=> {
     const oldArr = getFromLocalStorage()
     if (oldArr) {
-        if ((oldArr.find((item)=>{item == id }))) {
+        if ((oldArr.find((item)=>{return item == id }))) {
             return
         }
         oldArr.push(id)

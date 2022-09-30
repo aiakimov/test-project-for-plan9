@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
 import axios from "axios";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Books } from "../../interfaces";
 import Layout from "../../components/Layout";
 import { setToLocalStorage } from "../../utilities/localStorage";
+import Link from "next/link";
 
 const Book = () => {
 	const id = String(useRouter().query.id);
@@ -22,12 +23,12 @@ const Book = () => {
 
 	return (
 		<Layout title="BOOK">
-			<div className=" flex flex-col items-center gap-7 text-center mt-[15%]">
-				<h1 className="text-4xl text-text-dark font-bold py-5">
+			<div className=" flex flex-col items-center gap-7 text-center lg:mt-[10%] mt-[20px] lg:p-0 p-5">
+				<h1 className="md:text-4xl text-2xl text-text-dark font-bold py-5">
 					{book.length ? book[0].title : ""}
 				</h1>
 				<img
-					className="overflow-hidden max-w-[20%] mb-5
+					className="overflow-hidden lg:max-w-[30%] max-w-[60%] mb-5
 							opacity-100 shadow-2xl rounded 
 							border border-bg-dark"
 					src={book.length ? book[0].formats["image/jpeg"] : ""}
@@ -39,10 +40,10 @@ const Book = () => {
 								<div
 									key={item.name}
 									className="flex flex-col items-center">
-									<p className="text-2xl text-text-dark font-bold ">
+									<p className="md:text-2xl text-xl text-text-dark font-bold ">
 										{item.name}
 									</p>
-									<p className="text-l text-text-light font-bold tracking-widest">
+									<p className="text-l text-text-light font-bold tracking-widest mt-2">
 										{item.birth_year
 											? Math.abs(item.birth_year)
 											: "?"}
@@ -66,6 +67,16 @@ const Book = () => {
 						  })
 						: ""}
 				</ul>
+				<Link
+					rel="stylesheet"
+					href="/books">
+					<p
+						className="px-[20px] py-[10px] border border-text-dark font-bold rounded
+					cursor-pointer delay-50 hover:shadow-xl hover:bg-text-light hover:text-bg-light
+					hover:shadow-bg-light hover:border-2 hover:border-text-light active:border-bg-light hover:transition-all bg-bg-dark shadow-bg-light shadow-xl">
+						Go Back
+					</p>
+				</Link>
 			</div>
 		</Layout>
 	);
