@@ -117,7 +117,7 @@ const Book = () => {
 					setRequest(false);
 				});
 		}
-	}, [request]);
+	}, [request, books, nextPage]);
 
 	useEffect(() => {
 		const viewedBooks = getCardFromLocalStorage();
@@ -156,9 +156,10 @@ const Book = () => {
 					{books.map((item) => {
 						const itemLink = "/books/" + String(item.id);
 						return (
-							<Link href={itemLink}>
+							<Link
+								key={item.id}
+								href={itemLink}>
 								<li
-									key={item.id}
 									className="xl:w-[20%] xl:h-[450px] lg:w-[27%] lg:h-[420px] md:w-[40%] md:h-[400px] sm:w-[40%] sm:h-[400px] w-[90%] h-[50vh] cursor-pointer delay-50 hover:shadow-xl 
 									hover:transition-all">
 									<div
