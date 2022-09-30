@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Image from "next/image";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Books } from "../../interfaces";
@@ -23,13 +24,13 @@ const Book = () => {
 	useEffect(() => {
 		setCardToLocalStorage(id);
 	}, []);
-	
+
 	useEffect(() => {
 		const version = process.env.NEXT_PUBLIC_VALUE;
 		if (version) {
 			setToLocalStorage("VERSION", version);
 		}
-	},[]);
+	}, []);
 
 	return (
 		<Layout title="BOOK">
@@ -70,7 +71,9 @@ const Book = () => {
 					{book.length && book[0].subjects?.length
 						? book[0].subjects.map((item) => {
 								return (
-									<li className="text-xs text-text-dark font-bold  italic">
+									<li
+										key={item}
+										className="text-xs text-text-dark font-bold  italic">
 										{item}
 									</li>
 								);

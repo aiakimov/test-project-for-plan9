@@ -1,5 +1,6 @@
 import axios from "axios";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import Forms from "../../components/Forms";
 import Layout from "../../components/Layout";
@@ -159,10 +160,9 @@ const Book = () => {
 					{books.map((item) => {
 						const itemLink = "/books/" + String(item.id);
 						return (
-							<Link
-								href={itemLink}
-								key={item.id}>
+							<Link href={itemLink}>
 								<li
+									key={item.id}
 									className="xl:w-[20%] xl:h-[450px] lg:w-[27%] lg:h-[420px] md:w-[40%] md:h-[400px] sm:w-[40%] sm:h-[400px] w-[90%] h-[50vh] cursor-pointer delay-50 hover:shadow-xl 
 									hover:transition-all">
 									<div
@@ -198,7 +198,6 @@ const Book = () => {
 												);
 											})}
 										</div>
-
 										<img
 											className="overflow-hidden max-w-[60%]  absolute left-[10%] lg:top-[130px] top-[25%] max-h-[200px]
 										opacity-100 shadow-xl rounded border-2 border-bg-light "
