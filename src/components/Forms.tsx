@@ -18,11 +18,11 @@ const Forms: FC<PropsForm> = ({
 
 	useEffect(() => {
 		setFilters(innerValues);
-	}, [innerValues]);
+	}, [innerValues, setFilters]);
 
 	useEffect(() => {
 		setSearchValue(innerSearchValue);
-	}, [innerSearchValue]);
+	}, [innerSearchValue, setSearchValue]);
 
 	return (
 		<div className="flex justify-between static lg:h-[70px] w-full py-[10px] lg:flex-row md:flex-row mt-[20px] flex-col items-center gap-5 ">

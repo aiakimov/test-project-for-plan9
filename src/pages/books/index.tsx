@@ -25,7 +25,6 @@ const Book = () => {
 		"https://gutendex.com/books?"
 	);
 	const [startSearch, setStartSearch] = useState<boolean>(false);
-	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	useEffect(() => {
 		const version = process.env.NEXT_PUBLIC_VALUE;
@@ -55,10 +54,8 @@ const Book = () => {
 		axios.get(filterReq).then((responce) => {
 			setBooks(responce.data.results);
 			setNextPage(responce.data.next);
-			setIsLoading(true);
 		});
-		return setIsLoading(false);
-	}, []);
+	}, [filterReq]);
 
 	useEffect(() => {
 		axios.get(filterReq).then((responce) => {
@@ -99,7 +96,7 @@ const Book = () => {
 			setStartSearch(false);
 			setSearchValue("");
 		}
-	}, [startSearch]);
+	}, [startSearch, filterReq, searchValue]);
 
 	useEffect(() => {
 		document.addEventListener("scroll", scrollHandler);
@@ -127,7 +124,6 @@ const Book = () => {
 		viewedBooks && setViewedBooks(viewedBooks);
 	}, []);
 
-	console.log(process.env.NEXT_PUBLIC_VALUE);
 	return (
 		<>
 			<Layout title="BOOKS">
@@ -139,7 +135,7 @@ const Book = () => {
 					setStartSearch={setStartSearch}
 				/>
 				<ul className="flex flex-wrap gap-20 justify-center mt-[50px]">
-					{books.length && isLoading ? (
+					{books.length ? (
 						""
 					) : (
 						<div className="flex flex-col items-center gap-[50px]">

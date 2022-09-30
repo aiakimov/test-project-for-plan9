@@ -19,11 +19,11 @@ const Book = () => {
 		axios.get(`https://gutendex.com/books?ids=${id}`).then((responce) => {
 			setBook(responce.data.results);
 		});
-	}, []);
+	}, [id]);
 
 	useEffect(() => {
 		setCardToLocalStorage(id);
-	}, []);
+	}, [id]);
 
 	useEffect(() => {
 		const version = process.env.NEXT_PUBLIC_VALUE;
